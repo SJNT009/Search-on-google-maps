@@ -10,16 +10,17 @@ const initMap = () => {
     //     position: {latitude: 47.00774402194879, longitude: 28.85061464753502},
     //     map: map,
     //   });
-
 }
   
-
 //=============== Victoria's Task ===============\\
 
 const suggestionedPlaces = [
-    {placeName: "Chisinau", lat: 1, long: 2},
-    {placeName: "Dublin", lat: 3, long: 4},
-    {placeName: "Paris", lat: 5, long: 6},
+    // {placeName: "Chisinau", lat: , long: },
+    // {placeName: "Dublin", lat: , long: },
+    // {placeName: "Paris", lat: , long: },
+    // {placeName: "Canberra", lat: , long: },
+
+    "Chisinau", "Dublin", "Paris", "Canberra"
 ]
 
 const wrapper = document.createElement("div")
@@ -39,15 +40,6 @@ const autocomplete = document.createElement("div")
 autocomplete.classList.add("autocom-box")
 searcher.append(autocomplete)
 
-const places = document.createElement("ul")
-
-suggestionedPlaces.forEach(element => {
-    const list = document.createElement("li");
-    list.textContent = element.placeName;
-    places.append(list);
-});
-autocomplete.append(places);
-
 const wrapSearch = document.querySelector(".search-input")
 const inputbox = wrapSearch.querySelector("input")
 const suggestions = wrapSearch.querySelector(".autocom-box");
@@ -56,16 +48,37 @@ inputbox.onkeyup = (e) => {
     const usersRequest = e.target.value;
     if (usersRequest) {
         const suggested = suggestionedPlaces.filter((request) => {
-            return request.placeName.toLocaleLowerCase().startsWith(usersRequest.toLocaleLowerCase())
+            return request.toLocaleLowerCase().startsWith(usersRequest.toLocaleLowerCase())
         })
-
-        // const s = suggested.map((request) => {
-        //     return request = '<li>' + request + '</li>';
-        // })
-        // console.log(suggested);
-
+        const s = suggested.map((request) => {
+            return request = `<li>` + request + `</li>`
+        })
+        wrapSearch.classList.add("active")
+        dropDownSuggest(s)
+        const wholeList = suggestions.querySelectorAll("li")
+        for (let i = 0; i < wholeList.length; i++) {
+            wholeList[i].setAttribute("onclick", "select(this)")            
+        }
+    } else{
+        wrapSearch.classList.remove("active")
     }
 }
 
+// const selected = (element) => {
+//     const select = element.textContent
+//     console.log(select)
+// }
+
+const dropDownSuggest = (list) => {
+    let listPlaces;
+    if (!list.length) {
+        const notFound = inputbox.value
+        listPlaces = `<li>` + notFound + `</li>`
+    }else{
+        listPlaces = list.join('')
+    }
+    suggestions.innerHTML = listPlaces
+}
 
 //===================== END =====================\\
+
