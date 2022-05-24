@@ -13,7 +13,7 @@ function initMap() {
 
   
 //=============== Victoria's Task ===============\\
-
+ 
 const suggestionedPlaces = [
     // {placeName: "Chisinau", lat: , long: },
     // {placeName: "Dublin", lat: , long: },
