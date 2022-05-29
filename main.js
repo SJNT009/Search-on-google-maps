@@ -1,17 +1,19 @@
-function initMap() {
-    const options = {
-        center: {latitude: 47.00774402194879, longitude: 28.85061464753502},
-        zoom: 8,
-    }
-    const map = new google.maps.Map(document.getElementById("map"), options)
+google.maps.event.addDomListener(window, 'load', init);
+    function init() {
+    const mapOptions = {
+        zoom: 11,
+        center: new google.maps.LatLng(40.6700, -73.9400),
+        styles: [{"featureType":"all","elementType":"labels.text","stylers":[{"color":"#878787"}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"visibility":"off"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f9f5ed"}]},{"featureType":"road.highway","elementType":"all","stylers":[{"color":"#f5f5f5"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#c9c9c9"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#aee0f4"}]}]
+    };
+    
+const mapElement = document.getElementById('map');
+const map = new google.maps.Map(mapElement, mapOptions);
+const marker = new google.maps.Marker({
+    position: new google.maps.LatLng(40.6700, -73.9400),
+    map: map,
+    });
 }
 
-    // const marker = new google.maps.Marker({
-    //     position: {latitude: 47.00774402194879, longitude: 28.85061464753502},
-    //     map: map,
-    //   });
-
-  
 //=============== Victoria's Task ===============\\
  
 const suggestionedPlaces = [
@@ -81,4 +83,3 @@ const dropDownSuggest = (list) => {
 }
 
 //===================== END =====================\\
-
